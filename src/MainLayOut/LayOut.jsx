@@ -6,7 +6,6 @@ const LayOut = () => {
     return (
         <div>
             <Navbar></Navbar>
-            
             <Outlet></Outlet>
         </div>
     );
