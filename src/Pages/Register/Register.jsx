@@ -3,8 +3,9 @@ import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -28,7 +29,7 @@ const Register = () => {
           const newUser = {
             email: data.email,
             name: data.name,
-            role: "unsubscribed",
+            profession: data.profession,
           };
           axiosPublic.post("/users", newUser).then((res) => {
             if (res.data.insertedId) {
@@ -126,6 +127,7 @@ const Register = () => {
               </option>
               <option value="banker">Banker</option>
               <option value="student">Student</option>
+              <option value="student">Teacher</option>
             </select>
             {errors.profession && (
               <p className="text-red-500">{errors.profession.message}</p>

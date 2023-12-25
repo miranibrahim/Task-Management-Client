@@ -1,9 +1,11 @@
 
+import Hero from "./Hero";
+
 
 const Home = () => {
     return (
-        <div>
-            kfnlflsmlf
+        <div className="pt-20">
+            <Hero></Hero>
         </div>
     );
 };
