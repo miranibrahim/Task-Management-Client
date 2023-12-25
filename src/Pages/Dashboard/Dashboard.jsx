@@ -3,7 +3,9 @@ import CreateTask from "../../Component/AddTaskModal/CreateTask";
 import TaskList from "../../Component/AddTaskModal/TaskList";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../Provider/AuthProvider";
-
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+import { Toaster } from "react-hot-toast";
 
 const Dashboard = () => {
   const user = useContext(AuthContext);
@@ -18,19 +20,28 @@ const Dashboard = () => {
       console.error("Error fetching coupons:", error);
     }
   }, [axiosPublic, user.user.email]);
-  
+
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
-  
-  
 
   console.log(tasks);
   return (
-    <div className="pt-20 flex flex-col items-center">
-      <CreateTask tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}></CreateTask>
-      <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}></TaskList>
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <Toaster position="top-right" reverseOrder={false} />
+      <div className="pt-20 w-4/5 mx-auto">
+        <CreateTask
+          tasks={tasks}
+          setTasks={setTasks}
+          fetchTasks={fetchTasks}
+        ></CreateTask>
+        <TaskList
+          tasks={tasks}
+          setTasks={setTasks}
+          fetchTasks={fetchTasks}
+        ></TaskList>
+      </div>
+    </DndProvider>
   );
 };
 

@@ -2,8 +2,9 @@ import { useContext } from "react";
 import PropTypes from "prop-types";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../Provider/AuthProvider";
-import toast, { Toaster } from "react-hot-toast";
+
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 // eslint-disable-next-line no-unused-vars
 const CreateTask = ({ tasks, setTasks, fetchTasks }) => {
@@ -32,7 +33,7 @@ const CreateTask = ({ tasks, setTasks, fetchTasks }) => {
 
   return (
     <div className="w-full mx-auto">
-      <Toaster position="top-right" reverseOrder={false} />
+      
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 ">
         <div className="w-3/4 mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="mb-4">

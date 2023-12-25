@@ -20,7 +20,7 @@ const TaskList = ({ tasks, setTasks, fetchTasks }) => {
   }, [tasks]);
   const statuses = ["todo", "ongoing", "completed"];
   return (
-    <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-16">
+    <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       {statuses.map((status, index) => (
         <Partition
           key={index}
