@@ -10,7 +10,6 @@ const CreateTask = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     const task = {
       title: data.title,
       description: data.description,
@@ -82,7 +81,7 @@ const CreateTask = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <button type="submit" className="btn bg-lime-500 w-full md:w-auto ">
+          <button type="submit" className="btn bg-lime-500 w-full md:w-auto text-black">
             Create Task
           </button>
         </div>
