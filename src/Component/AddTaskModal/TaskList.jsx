@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Partition from "./Partition";
 
-const TaskList = ({ tasks, setTasks, fetchTasks }) => {
+const TaskList = ({ tasks, refetch }) => {
   const [todo, setTodo] = useState([]);
   const [ongoing, setOngoing] = useState([]);
   const [completed, setCompleted] = useState([]);
@@ -16,7 +16,6 @@ const TaskList = ({ tasks, setTasks, fetchTasks }) => {
 
     const getCompleted = tasks.filter((task) => task.status === "completed");
     setCompleted(getCompleted);
-
   }, [tasks]);
   const statuses = ["todo", "ongoing", "completed"];
   return (
@@ -26,8 +25,7 @@ const TaskList = ({ tasks, setTasks, fetchTasks }) => {
           key={index}
           status={status}
           tasks={tasks}
-          setTasks={setTasks}
-          fetchTasks={fetchTasks}
+          refetch={refetch}
           todo={todo}
           ongoing={ongoing}
           completed={completed}
@@ -39,8 +37,7 @@ const TaskList = ({ tasks, setTasks, fetchTasks }) => {
 
 TaskList.propTypes = {
   tasks: PropTypes.array.isRequired,
-  setTasks: PropTypes.func.isRequired,
-  fetchTasks: PropTypes.func.isRequired,
+  refetch: PropTypes.func.isRequired,
 };
 
 export default TaskList;

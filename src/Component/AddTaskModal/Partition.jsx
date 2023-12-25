@@ -4,15 +4,7 @@ import Task from "./Task";
 import { useDrop } from "react-dnd";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
-const Partition = ({
-  status,
-  tasks,
-  setTasks,
-  todo,
-  ongoing,
-  completed,
-  fetchTasks,
-}) => {
+const Partition = ({ status, tasks, todo, ongoing, completed, refetch }) => {
   const axiosPublic = useAxiosPublic();
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
@@ -32,7 +24,7 @@ const Partition = ({
 
     console.log(changeResult);
     if (changeResult.data.modifiedCount) {
-      fetchTasks();
+      refetch();
     }
   };
 
@@ -65,8 +57,7 @@ const Partition = ({
             key={task._id}
             task={task}
             tasks={tasks}
-            setTasks={setTasks}
-            fetchTasks={fetchTasks}
+            refetch={refetch}
           />
         ))}
     </div>
@@ -76,8 +67,7 @@ const Partition = ({
 Partition.propTypes = {
   status: PropTypes.string.isRequired,
   tasks: PropTypes.array.isRequired,
-  setTasks: PropTypes.func.isRequired,
-  fetchTasks: PropTypes.func.isRequired,
+  refetch: PropTypes.func.isRequired,
   todo: PropTypes.array.isRequired,
   ongoing: PropTypes.array.isRequired,
   completed: PropTypes.array.isRequired,

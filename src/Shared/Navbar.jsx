@@ -20,6 +20,9 @@ const Navbar = () => {
       <li>
         <NavLink to="/dashboard">Dashboard</NavLink>
       </li>
+      <li>
+        <NavLink to="/community">User Community</NavLink>
+      </li>
       {!user ? (
         <>
           <li>
