@@ -1,10 +1,12 @@
 import { useContext } from "react";
+import PropTypes from "prop-types";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 
-const CreateTask = () => {
+// eslint-disable-next-line no-unused-vars
+const CreateTask = ({ tasks, setTasks, fetchTasks }) => {
   const user = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset } = useForm();
@@ -23,6 +25,7 @@ const CreateTask = () => {
 
     if (taskResult.data.insertedId) {
       toast.success("Task Added Successfully");
+      fetchTasks();
       reset();
     }
   };
@@ -81,7 +84,10 @@ const CreateTask = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <button type="submit" className="btn bg-lime-500 w-full md:w-auto text-black">
+          <button
+            type="submit"
+            className="btn bg-lime-500 w-full md:w-auto text-black"
+          >
             Create Task
           </button>
         </div>
@@ -89,5 +95,11 @@ const CreateTask = () => {
     </div>
   );
 };
+
+CreateTask.propTypes = {
+    tasks: PropTypes.array.isRequired,
+    setTasks: PropTypes.func.isRequired,
+    fetchTasks: PropTypes.func.isRequired,
+  };
 
 export default CreateTask;

@@ -28,8 +28,8 @@ const Dashboard = () => {
   console.log(tasks);
   return (
     <div className="pt-20 flex flex-col items-center">
-      <CreateTask tasks={tasks} setTasks={setTasks}></CreateTask>
-      <TaskList tasks={tasks} setTasks={setTasks}></TaskList>
+      <CreateTask tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}></CreateTask>
+      <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}></TaskList>
     </div>
   );
 };

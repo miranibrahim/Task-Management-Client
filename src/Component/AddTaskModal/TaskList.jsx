@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Partition from "./Partition";
 
-const TaskList = ({ tasks, setTasks }) => {
+const TaskList = ({ tasks, setTasks, fetchTasks }) => {
   const [todo, setTodo] = useState([]);
   const [ongoing, setOngoing] = useState([]);
   const [completed, setCompleted] = useState([]);
@@ -20,13 +20,14 @@ const TaskList = ({ tasks, setTasks }) => {
   }, [tasks]);
   const statuses = ["todo", "ongoing", "completed"];
   return (
-    <div className="mt-10 grid md:grid-cols-2 grid-cols-3 gap-16">
+    <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-16">
       {statuses.map((status, index) => (
         <Partition
           key={index}
           status={status}
           tasks={tasks}
           setTasks={setTasks}
+          fetchTasks={fetchTasks}
           todo={todo}
           ongoing={ongoing}
           completed={completed}
@@ -39,6 +40,7 @@ const TaskList = ({ tasks, setTasks }) => {
 TaskList.propTypes = {
   tasks: PropTypes.array.isRequired,
   setTasks: PropTypes.func.isRequired,
+  fetchTasks: PropTypes.func.isRequired,
 };
 
 export default TaskList;

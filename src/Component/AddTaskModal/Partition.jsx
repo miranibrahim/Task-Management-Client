@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Header from "./Header";
 import Task from "./Task";
 
-const Partition = ({ status, tasks, setTasks, todo, ongoing, completed }) => {
+const Partition = ({ status, tasks, setTasks, todo, ongoing, completed, fetchTasks }) => {
   let text = "TODO";
   let bg = "bg-slate-500";
   let tasksToMap = todo;
@@ -25,7 +25,7 @@ const Partition = ({ status, tasks, setTasks, todo, ongoing, completed }) => {
 
       {tasksToMap.length > 0 &&
         tasksToMap.map((task) => (
-          <Task key={task._id} task={task} tasks={tasks} setTasks={setTasks} />
+          <Task key={task._id} task={task} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
         ))}
     </div>
   );
@@ -35,6 +35,7 @@ Partition.propTypes = {
     status: PropTypes.string.isRequired,
     tasks: PropTypes.array.isRequired, 
     setTasks: PropTypes.func.isRequired, 
+    fetchTasks: PropTypes.func.isRequired, 
     todo: PropTypes.array.isRequired,
     ongoing: PropTypes.array.isRequired,
     completed: PropTypes.array.isRequired,
