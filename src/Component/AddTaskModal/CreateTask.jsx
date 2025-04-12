@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../Provider/AuthProvider";
-
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import axiosSecure from "../../Hooks/axiosSecure";
 
 // eslint-disable-next-line no-unused-vars
-const CreateTask = ({ tasks, refetch }) => {
+const CreateTask = ({ refetch }) => {
   const user = useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
@@ -21,7 +19,7 @@ const CreateTask = ({ tasks, refetch }) => {
       status: "todo",
       userEmail: user.user.email,
     };
-    const taskResult = await axiosPublic.post("/tasks", task);
+    const taskResult = await axiosSecure.post("/tasks", task);
     console.log(taskResult);
 
     if (taskResult.data.insertedId) {
@@ -33,8 +31,7 @@ const CreateTask = ({ tasks, refetch }) => {
 
   return (
     <div className="w-full mx-auto">
-      
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 ">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
         <div className="w-3/4 mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-1">Title:</label>
@@ -84,7 +81,7 @@ const CreateTask = ({ tasks, refetch }) => {
             </select>
           </div>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mt-4">
           <button
             type="submit"
             className="btn bg-lime-500 w-full md:w-auto text-black"
@@ -98,8 +95,7 @@ const CreateTask = ({ tasks, refetch }) => {
 };
 
 CreateTask.propTypes = {
-    tasks: PropTypes.array.isRequired,
-    refetch: PropTypes.func.isRequired,
-  };
+  refetch: PropTypes.func.isRequired,
+};
 
 export default CreateTask;

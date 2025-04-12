@@ -9,84 +9,83 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-
 import { app } from "../Firebase/firebase.config";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
-// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const googleProvider = new GoogleAuthProvider();
 
-  const createUser = (email, password) => {
+  // Function to handle user login and registration
+  const handleAuth = (authMethod, email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return authMethod(auth, email, password);
   };
 
-  const signIn = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
+  // Handle logout and cleanup
   const logOut = () => {
-    setLoading(false);
-    return signOut(auth);
+    setLoading(true);
+    return signOut(auth)
+      .then(() => {
+        localStorage.removeItem("access-token");
+        setUser(null);
+      })
+      .finally(() => setLoading(false));
   };
 
+  // Update the user profile (name and photo)
   const updateUserProfile = (name, photoURL) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photoURL,
-    });
+    return updateProfile(auth.currentUser, { displayName: name, photoURL });
   };
 
+  // Google sign-in
   const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
+  // Fetch JWT token and update user on auth state change
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("current user", currentUser);
       if (currentUser) {
-        const userInfo = {
-          email: currentUser.email,
-        };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
-          if (res.data.token) {
-            console.log(res.data.token);
-            localStorage.setItem("access-token", res.data.token);
-            setLoading(false);
-          }
-        });
+        axiosPublic.post("/jwt", { email: currentUser.email })
+          .then(({ data }) => {
+            const token = data.token;
+            if (token) {
+              localStorage.setItem("access-token", token);
+            }
+          })
+          .catch((err) => console.error("JWT fetch error:", err))
+          .finally(() => setLoading(false));
       } else {
         localStorage.removeItem("access-token");
         setLoading(false);
       }
-      setLoading(false);
     });
-    return () => {
-      return unSubscribe;
-    };
+
+    return () => unsubscribe();
   }, [axiosPublic]);
 
   const authInfo = {
     user,
     loading,
-    createUser,
-    signIn,
+    createUser: (email, password) => handleAuth(createUserWithEmailAndPassword, email, password),
+    signIn: (email, password) => handleAuth(signInWithEmailAndPassword, email, password),
     logOut,
     updateUserProfile,
     googleSignIn,
   };
+
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <>
+      <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    </>
   );
 };
 

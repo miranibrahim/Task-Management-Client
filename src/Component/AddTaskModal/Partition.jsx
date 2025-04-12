@@ -2,10 +2,9 @@ import PropTypes from "prop-types";
 import Header from "./Header";
 import Task from "./Task";
 import { useDrop } from "react-dnd";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import axiosSecure from "../../Hooks/axiosSecure";
 
 const Partition = ({ status, tasks, todo, ongoing, completed, refetch }) => {
-  const axiosPublic = useAxiosPublic();
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
     drop: (item) => addItemToSection(item.id),
@@ -20,7 +19,7 @@ const Partition = ({ status, tasks, todo, ongoing, completed, refetch }) => {
       id,
       status,
     };
-    const changeResult = await axiosPublic.patch(`/tasks/${id}`, taskStatus);
+    const changeResult = await axiosSecure.patch(`/tasks/${id}`, taskStatus);
 
     console.log(changeResult);
     if (changeResult.data.modifiedCount) {

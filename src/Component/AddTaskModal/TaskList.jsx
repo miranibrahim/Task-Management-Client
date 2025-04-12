@@ -18,6 +18,7 @@ const TaskList = ({ tasks, refetch }) => {
     setCompleted(getCompleted);
   }, [tasks]);
   const statuses = ["todo", "ongoing", "completed"];
+  console.log("from tl", tasks);
   return (
     <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       {statuses.map((status, index) => (

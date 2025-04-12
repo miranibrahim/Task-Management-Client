@@ -40,15 +40,9 @@ const router = createBrowserRouter([
             <UpdateTask></UpdateTask>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`https://task-management-server-alpha-seven.vercel.app/tasks/${params.id}`),
-      },
-      {
-        path: "/community",
-        element: <UserCommunity></UserCommunity>,
       },
     ],
   },
-]);
+]); 
 
 export default router;

@@ -28,52 +28,51 @@ const Login = () => {
           icon: "error",
           title: "Oops...",
           text: `${error.message}`,
-          
+
         });
       });
 
   };
   return (
-    <div className="flex h-screen justify-center items-center bg-gradient-to-r from-blue-400 via-black-200 via-blue-300 to-blue-500">
-      <div className="w-full max-w-md bg-black bg-opacity-30 bg-blend-screen p-16 rounded-lg">
+    <div className="flex h-screen items-center justify-center bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400">
+      <div className="w-full max-w-sm bg-white bg-opacity-90 p-8 rounded-lg shadow-md">
         <form onSubmit={handleLogin}>
-          <div className="mb-6">
-            <h1 className="text-4xl font-bold text-center">LOG IN</h1>
-          </div>
-          <div className="mb-6">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email ID *"
-              className="w-full border border-gray-300 rounded-md px-4 py-2"
-              required
-            />
-          </div>
+          <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Log In</h1>
 
-          <div className="mb-6">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password *"
-              className="w-full border border-gray-300 rounded-md px-4 py-2"
-              required
-            />
-          </div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email address"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+
           <button
             type="submit"
-            className="bg-red-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition"
           >
-            Log in
+            Log In
           </button>
         </form>
-        <h2 className="text-lg text-white mt-3 font-semibold">
-          New to this site? Please{" "}
-          <Link className="text-lime-300 underline" to="/register">
+
+        <p className="text-sm text-center text-gray-700 mt-4">
+          New to this site?{" "}
+          <Link to="/register" className="text-blue-600 hover:underline">
             Sign Up
-          </Link>{" "}
-        </h2>
+          </Link>
+        </p>
       </div>
     </div>
+
+
   );
 };
 

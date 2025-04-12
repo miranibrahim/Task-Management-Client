@@ -1,14 +1,13 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import PropTypes from "prop-types";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-
 import { useDrag } from "react-dnd";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import axiosSecure from "../../Hooks/axiosSecure";
 
 // eslint-disable-next-line no-unused-vars
 const Task = ({ task, tasks, refetch }) => {
-  const axiosPublic = useAxiosPublic();
+
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "task",
@@ -20,7 +19,7 @@ const Task = ({ task, tasks, refetch }) => {
 
   const handleRemove = async (id) => {
     console.log(id);
-    const deleteResult = await axiosPublic.delete(`/tasks/${id}`);
+    const deleteResult = await axiosSecure.delete(`/tasks/${id}`);
     console.log(deleteResult);
     if (deleteResult.data.deletedCount) {
       toast.error("Task Deleted");
@@ -37,7 +36,7 @@ const Task = ({ task, tasks, refetch }) => {
     minute: 'numeric',
     hour12: true,
   });
-  
+
   const priorityColors = {
     high: '#FF0000',      // Red
     moderate: '#FFA500',  // Orange/Yellow
@@ -54,9 +53,8 @@ const Task = ({ task, tasks, refetch }) => {
     <div>
       <div
         ref={drag}
-        className={`relative p-4 mt-8 shadow-md rounded-md cursor-grab ${
-          isDragging ? "opacity-25" : "opacity-100"
-        } border-2`}
+        className={`relative bg-white p-4 mt-8 shadow-md rounded-md cursor-grab ${isDragging ? "opacity-25" : "opacity-100"
+          } border-2`}
         onClick={() => document.getElementById(`my_modal_${task._id}`).showModal()}
       >
         <p className="font-semibold">{task.title}</p>
@@ -80,7 +78,9 @@ const Task = ({ task, tasks, refetch }) => {
           </div>
           <div className="modal-action">
             <form method="dialog" className="flex gap-2">
-            <Link to={`/updateTask/${task._id}`}><button className="btn">Update</button></Link>
+              <Link to={`/updateTask/${task._id}`} state={task}>
+                <button className="btn">Update</button>
+              </Link>
               <button className="btn">Close</button>
             </form>
           </div>

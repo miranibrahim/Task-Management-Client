@@ -73,143 +73,99 @@ const Register = () => {
     });
   };
   return (
-    <div className="flex justify-center items-center bg-gradient-to-r from-blue-400 via-black-200 via-blue-300 to-blue-500">
-      <div className="w-full max-w-md bg-black bg-opacity-30 bg-blend-screen py-8 px-10 mt-20 rounded-lg my-10">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400">
+      <div className="w-full max-w-md bg-white bg-opacity-95 p-8 rounded-lg shadow-lg my-8">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-6">
-            <h1 className="text-4xl font-bold text-center">REGISTER</h1>
-          </div>
-          <div className="mb-6">
-            <input
-              type="text"
-              name="photoURL"
-              placeholder="Paste your photoURL *"
-              className="w-full border border-gray-300 rounded-md px-4 py-2"
-              {...register("photoURL", {
-                required: "photoURL is required",
-              })}
-              aria-invalid={errors.name ? "true" : "false"}
-            />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-          <div className="mb-6">
-            <input
-              type="text"
-              name="name"
-              placeholder="User Name *"
-              className="w-full border border-gray-300 rounded-md px-4 py-2"
-              {...register("name", {
-                required: "Name is required",
-              })}
-              aria-invalid={errors.name ? "true" : "false"}
-            />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-          <div className="mb-6">
-            <select
-              name="profession"
-              className="w-full border border-gray-300 rounded-md px-4 py-2"
-              {...register("profession", {
-                required: "Profession is required",
-              })}
-              aria-invalid={errors.profession ? "true" : "false"}
-            >
-              <option value="" disabled>
-                Select Your Profession *
-              </option>
-              <option value="developer">Developer</option>
-              <option value="corporateProfessional">
-                Corporate Professional
-              </option>
-              <option value="banker">Banker</option>
-              <option value="student">Student</option>
-              <option value="student">Teacher</option>
-            </select>
-            {errors.profession && (
-              <p className="text-red-500">{errors.profession.message}</p>
-            )}
-          </div>
+          <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Register</h1>
 
-          <div className="mb-6">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email ID *"
-              className="w-full border border-gray-300 rounded-md px-4 py-2"
-              {...register("email", {
-                required: "Email Address is required",
-              })}
-              aria-invalid={errors.email ? "true" : "false"}
-            />
-            {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
-            )}
-          </div>
+          <input
+            type="text"
+            placeholder="Photo URL"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+            {...register("photoURL", { required: "Photo URL is required" })}
+          />
+          {errors.photoURL && <p className="text-red-500 text-sm">{errors.photoURL.message}</p>}
 
-          <div className="mb-6">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password *"
-              className="w-full border border-gray-300 rounded-md px-4 py-2"
-              {...register("password", {
-                required: true,
-                minLength: 6,
-                maxLength: 20,
-                pattern:
-                  /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
-              })}
-            />
-            {errors.password?.type === "required" && (
-              <p className="text-red-500">Password is required</p>
-            )}
-            {errors.password?.type === "minLength" && (
-              <p className="text-red-500">Minimum 6 character required</p>
-            )}
-            {errors.password?.type === "maxLength" && (
-              <p className="text-red-500">Maximum 20 character required</p>
-            )}
-            {errors.password?.type === "pattern" && (
-              <p className="text-red-800">
-                {" "}
-                *At least one uppercase letter, one lowercase letter, one number
-                and one special character required.*
-              </p>
-            )}
-          </div>
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+            {...register("name", { required: "Name is required" })}
+          />
+          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+
+          <select
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+            {...register("profession", { required: "Profession is required" })}
+          >
+            <option value="">Select Profession</option>
+            <option value="developer">Developer</option>
+            <option value="corporateProfessional">Corporate Professional</option>
+            <option value="banker">Banker</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+          {errors.profession && <p className="text-red-500 text-sm">{errors.profession.message}</p>}
+
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+            {...register("email", { required: "Email is required" })}
+          />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+            {...register("password", {
+              required: true,
+              minLength: 6,
+              maxLength: 20,
+              pattern: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
+            })}
+          />
+          {errors.password?.type === "required" && (
+            <p className="text-red-500 text-sm">Password is required</p>
+          )}
+          {errors.password?.type === "minLength" && (
+            <p className="text-red-500 text-sm">Minimum 6 characters</p>
+          )}
+          {errors.password?.type === "maxLength" && (
+            <p className="text-red-500 text-sm">Maximum 20 characters</p>
+          )}
+          {errors.password?.type === "pattern" && (
+            <p className="text-red-500 text-sm">
+              Must include uppercase, lowercase, number, and special character
+            </p>
+          )}
+
           <button
             type="submit"
-            className="bg-red-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition"
           >
             Sign Up
           </button>
         </form>
-        <h2 className="text-lg text-white mt-3 font-semibold">
-          Already have an account? Please{" "}
-          <Link className="text-lime-300 underline" to="/login">
+
+        <p className="text-sm text-center text-gray-700 mt-4">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-600 hover:underline">
             Log in
-          </Link>{" "}
-        </h2>
-        <div className="divider divider-warning text-white font-bold">
-          **OR**
-        </div>
-        <div className="text-3xl flex justify-evenly bg-white p-3">
-          <button>
-            <FaFacebook></FaFacebook>
-          </button>
-          <button onClick={handleGoogleSignIn}>
-            <FaGoogle></FaGoogle>
-          </button>
-          <button>
-            <FaGithub></FaGithub>
+          </Link>
+        </p>
+
+        <div className="my-4 text-center text-gray-500">OR</div>
+
+        <div className="flex justify-center space-x-4 text-xl">
+          <button onClick={handleGoogleSignIn} className="text-red-500 hover:text-red-600 flex items-center">
+            <FaGoogle /> <span>oogle</span>
           </button>
         </div>
       </div>
     </div>
+
   );
 };
 
