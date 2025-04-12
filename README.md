@@ -1,6 +1,3 @@
-### 📁 `frontend/README.md`
-
-```markdown
 # 🚀 Task Management Frontend
 
 This is the **frontend** for the Task Management System — a responsive, user-friendly application to manage daily tasks with ease. Built with **React.js**, styled using **Tailwind CSS**, and authenticated via **Firebase** with secure JWT-based backend verification.
