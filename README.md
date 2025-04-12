@@ -7,6 +7,10 @@ This is the **frontend** for the Task Management System — a responsive, user-f
 
 🔗 **Live Demo**: [Visit the Live App](https://task-management-client-weld.vercel.app)
 
+Demo user
+Mail: user1@gmail.com
+Paasword: User123@
+
 ---
 
 ## ✨ Features
