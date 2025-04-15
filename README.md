@@ -1,8 +1,8 @@
 # 🚀 Task Management Frontend
 
-This is the **frontend** for the Task Management System — a responsive, user-friendly application to manage daily tasks with ease. Built with **React.js**, styled using **Tailwind CSS**, and authenticated via **Firebase** with secure JWT-based backend verification.
+This is the **frontend** for the Task Management System — a responsive, user-friendly application to manage daily tasks with ease drag and drop. Built with **React.js**, styled using **Tailwind CSS**, **React-DND**, and authenticated via **Firebase** with secure JWT-based backend verification.
 
-🔗 **Live Demo**: [Visit the Live App](https://task-management-client-weld.vercel.app)
+🔗 **Live Demo**: [Visit the Live App](https://taskquest1.vercel.app)
 
 Demo user
 Mail: user1@gmail.com <br>
@@ -14,9 +14,9 @@ Paasword: User123@
 
 - 🔐 Firebase Authentication (Email/Password, Google Sign-In)
 - 🛡 JWT-based secure routes
-- 📋 Create, edit, delete, and update task status
+- 📋 Create, edit, delete, and update task status by just drag and drop.
 - 🎨 Beautiful and modern UI using Tailwind CSS
-- 💻 Dashboard view for managing personal tasks
+- 💻 Dashboard view for managing personal tasks.
 
 ---
 
